@@ -48,7 +48,7 @@ def euler_loop(func,a,b,nstep):
     """
     hstep=(b-a)/nstep
     y=a                                
-    integral=hstep*func(y)
+    integral=0.5*hstep*(func(a)+func(b))
     for i in xrange(nstep-1):
         y+=hstep
         integral+=func(y)*hstep
@@ -60,7 +60,7 @@ def euler(func,a,b,nstep):
     Use numpy array operations
     """
     hstep=(b-a)/nstep
-    x=np.linspace(a,b-hstep,nstep)
+    x=np.linspace(a+hstep,b-hstep,nstep-1)
     y=func(x)*hstep
-    return (np.sum(y))
+    return (np.sum(y)+0.5*hstep*(func(a)+func(b)))
 
