@@ -1,4 +1,4 @@
-"""this is a test
+"""
 integrate_sub.py -- subroutine functions for numerical integration
   integrate_driver does adaptive stepping and can be called with euler,
     trapzd, or midpoint as the underlying method
