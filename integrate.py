@@ -25,17 +25,17 @@ tolerance=1.e-6 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
 def integrand(x):
-    return(x**(-1.5))
+    return((x**(-1.5)))
 
 # read the integration limits from the command line
 a=float(sys.argv[1])
 b=float(sys.argv[2])
 
-[value, nc]=integrate_driver(integrand,euler,a,b,tolerance,nstepmax,verbose,'trapezoidal')
+[value, nc]=integrate_driver(integrand,simpson,a,b,tolerance,nstepmax,verbose,'simpson')
 #[value, nc]=integrate_driver(integrand,euler,a,b,tolerance,nstepmax,verbose)
 print 'Euler Integration Converged to ',value,' in ',nc,' steps'
-if (verbose):
-    call(["mv","iterations.out","euler.out"])
+#if (verbose):
+#    call(["mv","iterations.out","euler.out"])
 
 #[value, nc]=integrate_driver(integrand,trapzd,a,b,tolerance,nstepmax,verbose)
 #print 'Trapezoidal Integration Converged to ',value,' in ',nc,' steps'

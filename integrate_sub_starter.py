@@ -21,7 +21,7 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose,integrator_n
     from matplotlib.backends.backend_pdf import PdfPages
     fp = open('./output/'+integrator_name+'.txt','w')
     if (verbose):
-        f=open("iterations.out","w")
+        f=open("iterations.out","a")
     nstep=4
     oldint=0.0    
     integral=integrator(func,a,b,nstep)
@@ -31,7 +31,7 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose,integrator_n
         oldint=integral
         nstep*=2
 	integral=integrator(func,a,b,nstep)
-        #integral_simpson=4*integral/3.0-oldint/3.0
+        integral_simpson=4*integral/3.0-oldint/3.0
         if (verbose):
 	    hstep=(b-a)/nstep
             outstring="%8d %.8g %.8g\n" % (nstep,hstep,integral)
@@ -61,7 +61,7 @@ def euler_loop(func,a,b,nstep):
     """
     hstep=(b-a)/nstep
     y=a                                
-    integral=0.5*hstep*(func(a)+func(b))
+    integral=func(y)
     for i in xrange(nstep-1):
         y+=hstep
         integral+=func(y)*hstep
