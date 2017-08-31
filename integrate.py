@@ -21,7 +21,7 @@ from integrate_sub_starter import *
 
 # define several control variables
 nstepmax=2e8    	# maximum number of allowed integration steps
-tolerance=1.e-6		# require convergence to this fractional error
+tolerance=1.e-4 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
 def integrand(x):

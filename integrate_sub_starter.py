@@ -29,6 +29,7 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose):
         oldint=integral
         nstep*=2
 	integral=integrator(func,a,b,nstep)
+        integral=4*integral/3.0-oldint/3.0
         if (verbose):
 	    hstep=(b-a)/nstep
             outstring="%8d %.8g %.8g\n" % (nstep,hstep,integral)
