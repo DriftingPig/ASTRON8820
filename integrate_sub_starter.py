@@ -6,7 +6,7 @@ integrate_sub.py -- subroutine functions for numerical integration
 
 import numpy as np
 
-def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose,integrator_name):
+def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose):
     """
     Integrate a function func() using the specified integrator routine
     integrator = euler, euler_loop, trapzd, or midpoint
@@ -18,34 +18,23 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose,integrator_n
 
     Number of steps starts at 4 and doubles until convergence or nstep>nstepmax
     """
-    from matplotlib.backends.backend_pdf import PdfPages
-    fp = open('./output/'+integrator_name+'.txt','w')
     if (verbose):
-        f=open("iterations.out","w")
+        f=open("iterations.out","a")
     nstep=4
     oldint=0.0    
     integral=integrator(func,a,b,nstep)
-    #integral_simpson=integral
-    while ((np.fabs(oldint/integral-1.0) > tolerance) and (2*nstep<nstepmax)):
-        fp.write(str(nstep)+'\t'+str(np.fabs(oldint/integral-1.0))+'\n')
+    old_simpson=0.0
+    new_simpson=integral
+    while ((np.fabs(old_simpson/new_simpson-1.0) > tolerance) and (2*nstep<nstepmax)):
         oldint=integral
+        old_simpson=new_simpson
         nstep*=2
 	integral=integrator(func,a,b,nstep)
-        #integral_simpson=4*integral/3.0-oldint/3.0
+        new_simpson=4*integral/3.0-oldint/3.0
         if (verbose):
 	    hstep=(b-a)/nstep
             outstring="%8d %.8g %.8g\n" % (nstep,hstep,integral)
             f.write(outstring)
-    fp.write(str(nstep)+'\t'+str(np.fabs(oldint/integral-1.0))+'\n')
-    fp.close()
-    fq = np.loadtxt('./output/'+integrator_name+'.txt').transpose()
-    from matplotlib import pyplot as plt
-    with PdfPages('./output/'+integrator_name+'.pdf') as pdf:
-         plt.loglog(fq[0],fq[1])
-         plt.xlabel('nsteps')
-         plt.ylabel('error')
-         plt.title(integrator_name)
-         pdf.savefig()
     
     if (verbose):
         f.close()
