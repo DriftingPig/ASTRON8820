@@ -19,7 +19,7 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose):
     Number of steps starts at 4 and doubles until convergence or nstep>nstepmax
     """
     if (verbose):
-        f=open("iterations.out","a")
+        f=open("iterations.out","w")
     nstep=4
     oldint=0.0    
     integral=integrator(func,a,b,nstep)
@@ -33,15 +33,15 @@ def integrate_driver(func,integrator,a,b,tolerance,nstepmax,verbose):
         new_simpson=4*integral/3.0-oldint/3.0
         if (verbose):
 	    hstep=(b-a)/nstep
-            outstring="%8d %.8g %.8g\n" % (nstep,hstep,integral)
+            outstring="%8d %.8g %.8g\n" % (nstep,hstep,new_simpson)
             f.write(outstring)
     
     if (verbose):
         f.close()
-    if (np.fabs(oldint/integral-1.0) > tolerance):
+    if (np.fabs(old_simpson/new_simpson-1.0) > tolerance):
         print "Warning, fractional convergence is only ", \
 	  np.fabs(oldint/integral-1.0)
-    return [integral, nstep]
+    return [new_simpson, nstep]
 
 def euler_loop(func,a,b,nstep):
     """

@@ -25,7 +25,7 @@ tolerance=1.e-6 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
 def integrand(x):
-    return(x**(-1.5))
+    return 1/(x**(3/2)*(1+x**(3/2)))
 
 # read the integration limits from the command line
 a=float(sys.argv[1])
