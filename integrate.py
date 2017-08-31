@@ -21,7 +21,7 @@ from integrate_sub_starter import *
 
 # define several control variables
 nstepmax=2e8    	# maximum number of allowed integration steps
-tolerance=1.e-4 	# require convergence to this fractional error
+tolerance=1.e-6 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
 def integrand(x):
@@ -31,7 +31,7 @@ def integrand(x):
 a=float(sys.argv[1])
 b=float(sys.argv[2])
 
-[value, nc]=integrate_driver(integrand,euler_loop,a,b,tolerance,nstepmax,verbose)
+[value, nc]=integrate_driver(integrand,euler,a,b,tolerance,nstepmax,verbose,'trapezoidal')
 #[value, nc]=integrate_driver(integrand,euler,a,b,tolerance,nstepmax,verbose)
 print 'Euler Integration Converged to ',value,' in ',nc,' steps'
 if (verbose):
