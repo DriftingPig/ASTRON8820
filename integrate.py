@@ -25,7 +25,7 @@ tolerance=1.e-6 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
 def integrand(x):
-    return(math.sin(1.0/x)**2)
+    return(x**(-1.5))
 
 # read the integration limits from the command line
 a=float(sys.argv[1])
