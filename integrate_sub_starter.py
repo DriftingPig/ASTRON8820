@@ -91,3 +91,13 @@ def simpson(func,a,b,nstep):
            integral+=hstep*func(y)*4.0/3.0
            flag=1
     return integral
+
+def midpoint(func,a,b,nstep):
+    hstep=(b-a)/nstep
+    y=a+hstep/2.0
+    integral=func(y)*hstep
+    for i in xrange(nstep-1):
+        y+=hstep
+        integral+=func(y)*hstep
+    return(integral)
+
