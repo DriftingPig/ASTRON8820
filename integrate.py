@@ -24,14 +24,14 @@ nstepmax=9e8    	# maximum number of allowed integration steps
 tolerance=1.e-6 	# require convergence to this fractional error
 verbose=1		# write iterations to output files
 
-def integrand(x):
-    return(x**(-1.5))
+def integrand(z):
+    return((0.3*(1+z)**3+0.7)**(-0.5))
 
 # read the integration limits from the command line
 a=float(sys.argv[1])
 b=float(sys.argv[2])
 
-[value, nc]=integrate_driver(integrand,midpoint,a,b,tolerance,nstepmax,verbose,'midpoint')
+[value, nc]=integrate_driver(integrand,simpson,a,b,tolerance,nstepmax,verbose)
 #[value, nc]=integrate_driver(integrand,euler,a,b,tolerance,nstepmax,verbose)
 print 'Euler Integration Converged to ',value,' in ',nc,' steps'
 #if (verbose):
