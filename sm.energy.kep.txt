@@ -1,0 +1,54 @@
+#! /bin/sh
+# sm.energy.kep -- plot energy conservation for Kepler orbits
+
+ydot=$1
+wait=$2
+
+type='kep'
+label='Kepler Potential, \dot{y}_i='$ydot
+
+date=`date '+%D %H:%M'`
+
+sm -s << FIN
+if ($wait) {xterm_p} else {laser_pp 'energy.kep.ydot$ydot.ps' \n lweight 2}
+expand 0.85
+macro plt 2 {
+  sixwin \$1
+  read {t 1 de 6}
+
+  # the following two lines create symmetric y-axis limits that span the
+  # range of the vector de
+  set xx = de concat (-de)
+  limits -1 41 xx
+
+  box
+  connect t de
+  limits 0 10 0 10
+  relocate 0 10.5
+  putlabel 6 \$2
+  relocate 5 -1.5
+  putlabel 5 t
+  relocate -2.5 5
+  angle 90
+  putlabel 5 \Delta E/|E|
+  angle 0
+}
+da $type.ydot$ydot.eul.dt0.01
+plt 1 "Euler, dt=0.01"
+da $type.ydot$ydot.eul.dt0.0001
+plt 2 "Euler, dt=0.0001"
+da $type.ydot$ydot.leap.dt0.01
+plt 3 "Leapfrog, dt=0.01"
+da $type.ydot$ydot.leap.dt0.0001
+plt 4 "Leapfrog, dt=0.0001"
+
+ctype 0
+expand 1.1
+location 5000 29000 22530 30000
+limits 0 10 0 10
+relocate 5 12
+putlabel 5 $label
+
+#putdate "$date"
+if ($wait) {!sleep $wait} else {hardcopy}
+FIN

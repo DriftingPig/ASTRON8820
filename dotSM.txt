@@ -1,0 +1,52 @@
+#
+# Modified .sm file for the new Linux configuration
+#
+# edit things in <>'s below to customize before use
+# assumes that you have an sm/ directory in your home directory
+#
+# 2002 June 26 [rwp/osu]
+#
+###########################################################################
+#
+# system stuff - don't modify unless told to specifically!
+#
+file_type       unix
+filecap         /usr/local/pkg/lib/sm/filecap
+fonts           /usr/local/pkg/lib/sm/fonts.bin
+#graphcap        /usr/local/pkg/lib/sm/graphcap
+graphcap        /home/cosmology/dhw/Smacro/privcap /usr/local/pkg/lib/sm/graphcap
+help            /usr/local/pkg/lib/sm/help/
+macro           /usr/local/pkg/lib/sm/macro/
+temp_dir        /var/tmp/
+#
+# custom history & macro directories: macro2, here /home/machine/user/sm
+#
+history         80
+history_file    /home/cosmology/dhw/.smhist
+macro2          /home/cosmology/dhw/Smacro/
+#
+# set your default postscript printer here (example: zwicky)
+#
+printer         postscript library
+#
+# where you keep save files
+#
+save_file       /home/cosmology/dhw/sm.sav
+#
+# background and foreground color choices - beware, must be
+# valid X-windows names or RGB triplets
+#
+foreground    black
+background    white
+history_char    `
+TeX_strings     1
+#
+# default device - usually x11
+#
+#device x11 -bg black -fg white
+#
+# other stuff - uncomment only as required
+#
+#SHELL          /bin/sh
+#edit           /usr/local/pkg/lib/sm/maps.dat
+#termcap        /usr/local/pkg/lib/sm/termcap

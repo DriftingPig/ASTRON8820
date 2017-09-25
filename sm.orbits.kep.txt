@@ -1,0 +1,46 @@
+#! /bin/sh
+# sm.orbits.kep -- plot orbits for Kepler potential
+
+ydot=$1
+wait=$2
+
+type='kep'
+label='Kepler Potential, \dot{y}_i='$ydot
+
+date=`date '+%D %H:%M'`
+
+sm -s << FIN
+if ($wait) {xterm_p} else {laser_pp 'orbit.kep.ydot$ydot.ps' \n lweight 2}
+expand 0.85
+macro plt 2 {
+  sixwin \$1
+  limits -2 2 -2 2
+  box
+  read {x 2 y 3}
+  connect x y
+  limits 0 10 0 10
+  relocate 0 10.5
+  putlabel 6 \$2
+  relocate 5 -1.5
+  putlabel 5 x
+  relocate -1.5 5
+  putlabel 5 y
+}
+da $type.ydot$ydot.eul.dt0.01
+plt 1 "Euler, dt=0.01"
+da $type.ydot$ydot.eul.dt0.0001
+plt 2 "Euler, dt=0.0001"
+da $type.ydot$ydot.leap.dt0.01
+plt 3 "Leapfrog, dt=0.01"
+da $type.ydot$ydot.leap.dt0.0001
+plt 4 "Leapfrog, dt=0.0001"
+ctype 0
+expand 1.1
+location 5000 29000 22530 30000
+limits 0 10 0 10
+relocate 5 12
+putlabel 5 $label
+
+#putdate "$date"
+if ($wait) {!sleep $wait} else {hardcopy}
+FIN
