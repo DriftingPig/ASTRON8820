@@ -82,8 +82,10 @@ de=0
 print '%8.5f %7.3f %7.3f %8.2f %8.2f %7.4e' % (t,x,y,xdot,ydot,de)
 tnext=dtout
 
+xdd,ydd = accelerate(pot_type,x,y)
+xdot+=xdd*tstep/2.0
+ydot+=ydd*tstep/2.0
 while (t<tmax):
-
     xdd,ydd = accelerate(pot_type,x,y)
     x+=xdot*tstep
     y+=ydot*tstep
@@ -92,7 +94,7 @@ while (t<tmax):
     t+=tstep
 
     if (t>=tnext):
-        energy=potential(pot_type,x,y)+0.5*(xdot**2+ydot**2)
+        energy=potential(pot_type,x+xdot*tstep/2.0,y+ydot*tstep/2.0)+0.5*(xdot**2+ydot**2)
         de=(energy-e0)/np.abs(e0)
-        print '%8.5f %7.3f %7.3f %8.2f %8.2f %7.4e' % (t,x,y,xdot,ydot,de)
+        print '%8.5f %7.3f %7.3f %8.2f %8.2f %7.4e' % (t,x+xdot*tstep/2.0,y+ydot*tstep/2.0,xdot,ydot,de)
         tnext+=dtout

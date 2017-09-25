@@ -6,7 +6,7 @@ do
 
 echo $yd $dt
 python ./orbit_euler.py 1 0 0 $yd $dt 40 1 > kep.ydot$yd.eul.dt$dt 
-#orbit_leapfrog.py 1 0 0 $yd $dt 40 1 > kep.ydot$yd.leap.dt$dt 
+python ./orbit_leapfrog.py 1 0 0 $yd $dt 40 1 > kep.ydot$yd.leap.dt$dt 
 
 done
 done
