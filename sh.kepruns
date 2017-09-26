@@ -1,12 +1,16 @@
-for yd in 1 0.5 0.2
+for yd in 0.5
 do
 
-for dt in 0.01 0.0001
+for dt in 0.01 0.001  0.0001
 do
 
-echo $yd $dt
-python ./orbit_euler.py 1 0 0 $yd $dt 40 1 > kep.ydot$yd.eul.dt$dt 
-python ./orbit_leapfrog.py 1 0 0 $yd $dt 40 1 > kep.ydot$yd.leap.dt$dt 
+for qh in 0.9
+do
 
+echo $yd $dt $qh
+python ./orbit_euler.py 1 0 0 $yd $dt 40 2 $qh> ho.ydot$yd.eul.dt$dt.qh$qh 
+python ./orbit_leapfrog.py 1 0 0 $yd $dt 40 2 $qh> ho.ydot$yd.leap.dt$dt.qh$qh 
+
+done
 done
 done

@@ -47,8 +47,8 @@ def accelerate(pot,x,y):
         ydd= -y/r**3
     elif (pot==2):
         # up to you to fill in the next two lines
-        xdd=0#TODO 
-        ydd=0 
+        xdd=-x
+        ydd=-y/qh**2
     else:
         raise ValueError ("Invalid potential type")
 
@@ -66,7 +66,7 @@ def potential(pot,x,y):
         phi=-1/np.sqrt(x**2+y**2)
     elif (pot==2):
         # up to you to fill in the next line
-        phi=0#TODO
+        phi=x**2/2.0+y**2/(2.0*qh**2)
     else:
         raise ValueError ("Invalid potential type")
 
