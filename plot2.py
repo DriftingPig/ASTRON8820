@@ -108,8 +108,8 @@ def orbit_plot_ho_compare(dt):
     
     eul=np.loadtxt(dat.eul).transpose()  
     
-    lgd_leap, = plt.plot(leap[0],leap[7],'r',label='leap frog')
-    lgd_eul, = plt.plot(eul[0],eul[7],'g',label='euler')
+    lgd_leap, = plt.plot(leap[1],leap[2],'r',label='leap frog')
+    lgd_eul, = plt.plot(eul[1],eul[2],'g',label='euler')
     plt.legend(handles=[lgd_eul,lgd_leap])
     
     plotstyle()
