@@ -77,7 +77,7 @@ def orbit_plot_all(ydot=0.2):
     return True
 
 def orbit_plot_ho(ydot,dt=0.0001):
-    
+    print 'test'
     dat1 = filelist(ydot,dt,1)
     dat09 = filelist(ydot,dt,0.9)
     dat06 = filelist(ydot,dt,0.6)
@@ -86,9 +86,9 @@ def orbit_plot_ho(ydot,dt=0.0001):
     leap09=np.loadtxt(dat09.leap).transpose()
     leap06=np.loadtxt(dat06.leap).transpose()
     
-    q1, = plt.plot(leap1[1],leap1[2],'r',label='q=1.0')
-    q09, = plt.plot(leap09[1],leap09[2],'g',label='q=0.9')
-    q06, = plt.plot(leap06[1],leap06[2],'b',label='q=0.6')
+    q1, = plt.plot(leap1[0],leap1[7],'r',label='q=1.0')
+    q09, = plt.plot(leap09[0],leap09[7],'g',label='q=0.9')
+    q06, = plt.plot(leap06[0],leap06[7],'b',label='q=0.6')
     plt.legend(handles=[q1,q09,q06])
     
     plotstyle()
@@ -101,22 +101,21 @@ def orbit_plot_ho(ydot,dt=0.0001):
     return True
     
 def orbit_plot_ho_compare(dt):
-    
     dat = filelist(0.5,dt,0.9)
     
     leap=np.loadtxt(dat.leap).transpose()
     
     eul=np.loadtxt(dat.eul).transpose()  
     
-    lgd_leap, = plt.plot(leap[1],leap[2],'r',label='leap frog')
-    lgd_eul, = plt.plot(eul[1],eul[2],'g',label='euler')
+    lgd_leap, = plt.plot(leap[0],leap[5],'r',label='leap frog')
+    lgd_eul, = plt.plot(eul[0],eul[5],'g',label='euler')
     plt.legend(handles=[lgd_eul,lgd_leap])
     
     plotstyle()
-    plt.xlabel('AU')
-    plt.ylabel('AU') 
+    plt.xlabel('time')
+    plt.ylabel('energy') 
     plt.title('euler and leapfrog method for ydot=0.5 dt='+str(dt)+' q=0.9')
-    plt.axis((-1,1,-1,1))
+    #plt.axis((-1,1,-1,1))
     plt.show()
     #plt.clf()
     return True    
